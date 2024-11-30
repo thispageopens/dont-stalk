@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret file</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: times;
+        }
+
+        body, html {
+            height: 100%;
+        }
+
+        h2 {
+            color: #FFF5EE;
+        }
+
+        .background {
+            background-image: url('background.jpg'); /* Ganti dengan gambar pilihan */
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .blur-container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        input {
+            padding: 10px;
+            border: none;
+            border-bottom: 2px solid #FAEBD7;
+            background-color: transparent;
+            color: white;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        input:focus {
+            outline: none;
+            border-bottom: 2px solid #FF00FF;
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #3CB371;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #F8F8FF;
+        }
+
+        .forgot-password {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            background-color: transparent;
+            border: none;
+            color: #00FFFF; /* Warna neon cyan */
+            text-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: #FFFFFF; /* Warna saat hover */
+            text-shadow: 0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF;
+        }
+
+        /* Glitter Animation */
+        @keyframes glitter {
+            0%, 100% {
+                text-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
+            }
+            50% {
+                text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF;
+            }
+        }
+
+        .forgot-password {
+            animation: glitter 1.5s infinite;
+        }
+
+        #error-message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="blur-container">
+            <form id="pinForm">
+                <h2>厳しい世界への備え <br>αρχείο</h2>
+                <input type="password" id="pin" placeholder="Enter your access">
+                <button type="submit">Submit</button>
+                <p id="error-message">Incorrect Access. Please try again.</p>
+                <button class="forgot-password" type="button" onclick="showHelp()">Help?</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Audio element for notification sound -->
+    <audio id="helpSound" src="notifikasi.mp3"></audio> <!-- Ganti dengan file audio pilihan -->
+
+    <script>
+        document.getElementById('pinForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form submit default
+
+            const correctPin = "king051206petot0821!"; // PIN yang benar
+            const enteredPin = document.getElementById('pin').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (enteredPin === correctPin) {
+                // Redirect ke halaman eksternal jika PIN benar
+                window.location.href = "surprise.html"; // Ganti dengan URL tujuan
+            } else {
+                // Tampilkan pesan kesalahan jika PIN salah
+                errorMessage.style.display = "block";
+                
+                // Setelah 3 detik, sembunyikan pesan kesalahan
+                setTimeout(function() {
+                    errorMessage.style.display = "none";
+                    // Reset input field setelah beberapa detik
+                    document.getElementById('pin').value = "";
+                }, 3000); // 3000 milidetik = 3 detik
+            }
+        });
+
+        function showHelp() {
+            // Play the notification sound
+            const helpSound = document.getElementById('helpSound');
+            helpSound.play();
+
+            // Redirect to the help page after the sound plays
+            setTimeout(function() {
+                window.location.href = 'https://t.me/zakifrq'; // Arahkan ke link bantuan (tombol help)
+            }, 1000); // Tunggu 1 detik sebelum redirect
+        }
+    </script>
+</body>
+</html>
